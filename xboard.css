@@ -323,40 +323,40 @@ body.xboard-piece-transfer {
 /* Chess Pieces */
 
 .white.king {
-	background-image: url("../svg/sjakkpass/white-king.svg");
+	background-image: url("./svg/sjakkpass/white-king.svg");
 }
 .white.queen {
-	background-image: url("../svg/sjakkpass/white-queen.svg");
+	background-image: url("./svg/sjakkpass/white-queen.svg");
 }
 .white.rook {
-	background-image: url("../svg/sjakkpass/white-rook.svg");
+	background-image: url("./svg/sjakkpass/white-rook.svg");
 }
 .white.bishop {
-	background-image: url("../svg/sjakkpass/white-bishop.svg");
+	background-image: url("./svg/sjakkpass/white-bishop.svg");
 }
 .white.knight {
-	background-image: url("../svg/sjakkpass/white-knight.svg");
+	background-image: url("./svg/sjakkpass/white-knight.svg");
 }
 .white.pawn {
-	background-image: url("../svg/sjakkpass/white-pawn.svg");
+	background-image: url("./svg/sjakkpass/white-pawn.svg");
 }
 .black.king {
-	background-image: url("../svg/sjakkpass/black-king.svg");
+	background-image: url("./svg/sjakkpass/black-king.svg");
 }
 .black.queen {
-	background-image: url("../svg/sjakkpass/black-queen.svg");
+	background-image: url("./svg/sjakkpass/black-queen.svg");
 }
 .black.rook {
-	background-image: url("../svg/sjakkpass/black-rook.svg");
+	background-image: url("./svg/sjakkpass/black-rook.svg");
 }
 .black.bishop {
-	background-image: url("../svg/sjakkpass/black-bishop.svg");
+	background-image: url("./svg/sjakkpass/black-bishop.svg");
 }
 .black.knight {
-	background-image: url("../svg/sjakkpass/black-knight.svg");
+	background-image: url("./svg/sjakkpass/black-knight.svg");
 }
 .black.pawn {
-	background-image: url("../svg/sjakkpass/black-pawn.svg");
+	background-image: url("./svg/sjakkpass/black-pawn.svg");
 }
 
 /* Fairy Pieces */
@@ -426,7 +426,7 @@ body.xboard-piece-transfer {
 .xboard-palette > .delete-piece {
 	grid-area: 1/1/2/3;
 	background-size: auto 60%;
-	background-image: url('../svg/trash.svg');
+	background-image: url('./svg/trash.svg');
 	cursor: pointer;
 }
 
@@ -462,14 +462,14 @@ body.xboard-piece-transfer {
 .xboard-movelog > .start {
 	text-indent: -1000px;
 	overflow: hidden;
-	background-image: url("../svg/log-start.svg");
+	background-image: url("./svg/log-start.svg");
 	background-size: 28px;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
 
 .xboard-movelog > .start.current {
-	background-image: url("../svg/log-start-current.svg");
+	background-image: url("./svg/log-start-current.svg");
 }
 
 .xboard-movelog > .fullmove {
@@ -526,32 +526,32 @@ body.xboard-piece-transfer {
 	padding-left: 2px;
 }
 .xboard-movelog .black.king {
-	background-image: url("../svg/mini-chess/king-black.svg");
+	background-image: url("./svg/mini-chess/king-black.svg");
 }
 .xboard-movelog .black.queen {
-	background-image: url("../svg/mini-chess/queen-black.svg");
+	background-image: url("./svg/mini-chess/queen-black.svg");
 }
 .xboard-movelog .black.rook {
-	background-image: url("../svg/mini-chess/rook-black.svg");
+	background-image: url("./svg/mini-chess/rook-black.svg");
 }
 .xboard-movelog .black.bishop {
-	background-image: url("../svg/mini-chess/bishop-black.svg");
+	background-image: url("./svg/mini-chess/bishop-black.svg");
 }
 .xboard-movelog .black.knight {
-	background-image: url("../svg/mini-chess/knight-black.svg");
+	background-image: url("./svg/mini-chess/knight-black.svg");
 }
 .xboard-movelog .white.king {
-	background-image: url("../svg/mini-chess/king-white.svg");
+	background-image: url("./svg/mini-chess/king-white.svg");
 }
 .xboard-movelog .white.queen {
-	background-image: url("../svg/mini-chess/queen-white.svg");
+	background-image: url("./svg/mini-chess/queen-white.svg");
 }
 .xboard-movelog .white.rook {
-	background-image: url("../svg/mini-chess/rook-white.svg");
+	background-image: url("./svg/mini-chess/rook-white.svg");
 }
 .xboard-movelog .white.bishop {
-	background-image: url("../svg/mini-chess/bishop-white.svg");
+	background-image: url("./svg/mini-chess/bishop-white.svg");
 }
 .xboard-movelog .white.knight {
-	background-image: url("../svg/mini-chess/knight-white.svg");
+	background-image: url("./svg/mini-chess/knight-white.svg");
 }
