@@ -6,7 +6,7 @@ import {PieceMoveToSAN} from './san.js'
 import {INVALID_PROMOTION_CHOICE} from './errors.js'
 
 function PieceMoveCode(move){
-	return move.from * move.from.board.size + move.to;
+	return move.from.board.pack(move.from, move.to);
 }
 
 function IsSet(value){
@@ -46,7 +46,7 @@ export class Move {
 	}
 
 	get disambiguation(){
-		return GetMoveDisambiguation(this);
+		return null;
 	}
 
 	isCheck(position){
@@ -132,6 +132,10 @@ export class AbstractPieceMove extends Move {
 		return PieceMoveCode(this);
 	}
 
+	unwrap(){
+		return this;
+	}
+
 	toString(options){
 		return PieceMoveToSAN(this, options);
 	}
@@ -201,6 +205,10 @@ export class PieceMoveWrapper extends AbstractPieceMove {
 		return this.target.to;
 	}
 
+	get disambiguation(){
+		return this.target.disambiguation;
+	}
+
 	get captured(){
 		return this.target.captured;
 	}
@@ -215,6 +223,10 @@ export class PieceMoveWrapper extends AbstractPieceMove {
 
 	get isIrreversible(){
 		return this.target.isIrreversible;
+	}
+
+	unwrap(){
+		return this.target;
 	}
 }
 
@@ -241,6 +253,10 @@ export class PieceMove extends AbstractPieceMove {
 
 	get to(){
 		return this.#to;
+	}
+
+	get disambiguation(){
+		return GetMoveDisambiguation(this);
 	}
 
 	get captured(){

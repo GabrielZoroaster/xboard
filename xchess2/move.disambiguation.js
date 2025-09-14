@@ -25,11 +25,11 @@ function MoveKey(move){
 function * PieceMoves(moves){
 	for(const move of moves)
 		if(move.isPieceMove)
-			yield move;
+			yield move.unwrap();
 }
 
 function GroupPieceMoves(moves){
-	return Map.groupBy(PieceMoves(moves), MoveKey).values();
+	return Map.groupBy(new Set(PieceMoves(moves)), MoveKey).values();
 }
 
 function ResolveDisambiguate(moves){
