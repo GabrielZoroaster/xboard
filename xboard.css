@@ -1,4 +1,9 @@
 
+@font-face {
+  font-family: "monofur";
+  src: url("./fonts/monofur.ttf");
+}
+
 /* Transfer */
 
 body.xboard-piece-transfer *,
