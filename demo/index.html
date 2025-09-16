@@ -63,7 +63,6 @@
 		}
 
 		function ToggleStyle(){
-			console.log('ToggleStyle()');
 			if(board.rules === 'fullsize')
 				board.rules = 'compact';
 			else
@@ -93,10 +92,22 @@
 
 		function OnMove(){
 			if(game.isGameOver){
-				setTimeout(() => alert(game.reason), 100);
+				GameOver(game.result);
 			} else if(window.game.color.isBlack){
 				setTimeout(() => game.move(game.moves.rand()), 600);
 			}
+		}
+
+		function ShowPopup(message){
+			const dialog = document.createElement('dialog');
+			dialog.innerText = message;
+			dialog.addEventListener('click', () => dialog.remove());
+			main.append(dialog);
+			dialog.showModal();
+		}
+
+		function GameOver(result){
+			ShowPopup(result.reason);
 		}
 
 		function MenuItem(title, name, cb){
@@ -122,6 +133,7 @@
 		MenuItem('20x2', 'e20x2', () => SetGame({board: [20, 2]}));
 		MenuItem('40x20', 'e20x2', () => SetGame({board: [40, 20]}));
 		MenuItem('Style', 'style', ToggleStyle);
+		MenuItem('Dialog', 'dialog', () => ShowPopup('zuzuka'));
 
 		Sync();
 	</script>
