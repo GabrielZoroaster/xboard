@@ -1,0 +1,67 @@
+
+@font-face {
+  font-family: "monofur";
+  src: url("../fonts/monofur.ttf");
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: monofur;
+	margin: 0px;
+}
+
+main {
+	height: calc(100vh - 40px);
+	margin: 20px;
+	gap: 20px;
+	display: grid;
+	grid-template-columns: 140px minmax(300px, 800px) 200px;
+	align-items: start;
+}
+
+nav {
+	grid-area: 1/1/2/2;
+	display: grid;
+	gap: 4px;
+}
+nav > a {
+	display: block;
+	background-color: rgba(0,0,0,0.1);
+	padding: 10px 20px;
+	color: #000;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+nav > a:hover {
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+	font-weight: bold;
+}
+.setup > .xboard-movelog {
+	display: none;
+}
+.play > .xboard-palette {
+	display: none;
+}
+.setup nav > a.play {
+	display: none;
+}
+.play nav > a.setup {
+	display: none;
+}
+
+.xboard {
+	grid-area: 1/2/2/3;
+	max-height: 100%;
+}
+.xboard-palette {
+	grid-area: 1/3/2/4;
+	align-self: start;
+}
+.xboard-movelog {
+	grid-area: 1/3/2/4;
+	max-height: 100%;
+}

@@ -51,6 +51,8 @@ export class Game extends Emitter {
 	#setConfig(config = {}){
 		if(IS_STRING(config))
 			this.#setAsFEN(config);
+		else if(Game.is(config))
+			this.#setAsGame(config);
 		else if(IS_OBJECT(config))
 			this.#setAsObject(config);
 		else throw INVALID_GAME_CONFIG(config);
@@ -68,6 +70,14 @@ export class Game extends Emitter {
 		this.#rules = RuleEngine.from(rules);
 		this.#tags = TagMap.from(tags);
 		this.#current = SetupState.from(this, state);
+	}
+
+	#setAsGame(game){
+		this.#board = game.#board;
+		this.#bestiary = game.#bestiary;
+		this.#rules = game.#rules;
+		this.#tags = new TagMap(game.#tags);
+		this.#current = SetupState.fromGame(this, game);
 	}
 
 	#setAsFEN(fen){

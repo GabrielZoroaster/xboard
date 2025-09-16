@@ -5,29 +5,130 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<style type="text/css">
 		@import url("../xboard.css");
-
-		body {
-			font-family: monofur;
-		}
+		@import url("./demo.css");
 	</style>
 	<script type="module">
 		import {Game} from '../xchess2/index.js'
 		import {Board, MoveLog, Palette} from '../lib/index.js'
 
-		const game = new Game();
+		let game = new Game();
 		const board = new Board({game});
 		const log = new MoveLog(game, {pieceLetter: false});
 		const palette = new Palette(game.bestiary);
+		const main = document.querySelector('main');
+		const menu = document.querySelector('nav');
 
-		Object.assign(window, {game, board, log, palette});
+		Object.assign(window, {game, board, log, palette, Game});
 
 		game.position.setup();
-		game.on('move', () => game.lastMove.color.isWhite && setTimeout(() => game.move(game.moves.rand()), 600));
 		game.play();
 
-		document.body.append(board.tag, log.tag, palette.tag);
+		main.append(board.tag, log.tag, palette.tag);
+
+		function SetGame(config){
+			game = Game.from(config);
+			window.game = game;
+			board.game = game;
+			log.game = game;
+			palette.bestiary = game.bestiary;
+			Sync();
+		}
+
+		function Chess(){
+			const game = new Game();
+			game.position.setup();
+			SetGame(game);
+		}
+
+		function Chess960(){
+			const game = new Game();
+			game.position.setup960();
+			SetGame(game);
+		}
+
+		function Q16(){
+			SetGame({
+				board: [16,16],
+				bestiary: ['chess'],
+				position: 'rrnrnrbkqbrnrnrr/pppppppppppppppp/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/qqqqqqqqqqqqqqqq/PPPPPPPPPPPPPPPP/RRNRNRBKQBRNRNRR',
+			});
+		}
+
+		function Q14(){
+			SetGame({
+				board: [14,14],
+				bestiary: ['chess'],
+				position: 'rrnnrbkqbrnnrr/pppppppppppppp/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/qqqqqqqqqqqqqq/PPPPPPPPPPPPPP/RRNNRBKQBRNNRR',
+			});
+		}
+
+		function ToggleStyle(){
+			console.log('ToggleStyle()');
+			if(board.rules === 'fullsize')
+				board.rules = 'compact';
+			else
+				board.rules = 'fullsize';
+		}
+
+		function E2x2(){
+			SetGame({board: [2, 2]});
+		}
+
+		function E20x2(){
+			SetGame({board: [20, 2]});
+		}
+
+		function Sync(){
+			if(game.isSetup){
+				main.classList.add('setup');
+				main.classList.remove('play');
+				game.on('play', Sync);
+			} else {
+				main.classList.add('play');
+				main.classList.remove('setup');
+				game.on('move', OnMove);
+				OnMove();
+			}
+		}
+
+		function OnMove(){
+			if(game.isGameOver){
+				setTimeout(() => alert(game.reason), 100);
+			} else if(window.game.color.isBlack){
+				setTimeout(() => game.move(game.moves.rand()), 600);
+			}
+		}
+
+		function MenuItem(title, name, cb){
+			const a = document.createElement('a');
+			a.innerText = title;
+			a.addEventListener('click', cb);
+			a.className = name;
+			menu.append(a);
+		}
+
+		MenuItem('Play', 'setup', () => game.play());
+		MenuItem('Edit', 'play', () => SetGame(new Game(game)));
+		MenuItem('Replay', 'play', () => game.rewind());
+		MenuItem('Clear', 'setup', () => game.position.clear());
+		MenuItem('Sample', 'setup', () => game.position.sample());
+		MenuItem('Shuffle', 'setup', () => game.position.shuffle());
+		MenuItem('Flip', 'flip', () => board.flip());
+		MenuItem('Chess', 'chess', Chess);
+		MenuItem('Chess 960', 'chess960', Chess960);
+		MenuItem('Q14', 'q14', Q14);
+		MenuItem('Q16', 'q16', Q16);
+		MenuItem('2x2', 'e2x2', () => SetGame({board: [2, 2]}));
+		MenuItem('20x2', 'e20x2', () => SetGame({board: [20, 2]}));
+		MenuItem('40x20', 'e20x2', () => SetGame({board: [40, 20]}));
+		MenuItem('Style', 'style', ToggleStyle);
+
+		Sync();
 	</script>
 </head>
-<body>	
+<body>
+	<main>
+		<nav></nav>
+	</main>	
 </body>
 </html>

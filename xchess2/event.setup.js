@@ -43,6 +43,12 @@ export class SetupState extends GameState {
 		return state;
 	}
 
+	static fromGame(game, fromGame){
+		const state = new this(game);
+		state.#setGame(fromGame);
+		return state;
+	}
+
 	#result = new NoResult();
 	#position;
 	#color;
@@ -80,6 +86,15 @@ export class SetupState extends GameState {
 		this.#enPassant = enPassant;
 		this.#halfmoveClock = halfmoveClock;
 		this.#fullmoveNumber = fullmoveNumber;
+	}
+
+	#setGame(game){
+		this.#color = game.color;
+		this.#position = new SetupPosition(this.game, game.position);
+		this.#castling = SetupCastling.from(this.game, game.castling);
+		this.#enPassant = game.enPassant;
+		this.#halfmoveClock = game.halfmoveClock;
+		this.#fullmoveNumber = game.fullmoveNumber;
 	}
 
 	// Event
